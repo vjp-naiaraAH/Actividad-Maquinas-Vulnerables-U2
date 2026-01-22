@@ -81,7 +81,7 @@ Una vez que el nivel está validado, el archivo `sqli_1.php` define la función 
 **Captura de la función sqli($data) en sqli_1.php**  
 ![captura sqli_1.php](https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img12.png)
 
-Código relevante extraído:
+Código:
 
 ```php
 function sqli($data) {
@@ -102,12 +102,11 @@ function sqli($data) {
     return $data;
 }
 Explicación por nivel (en el que trabajamos: Low)
-
+```
 + Low (case "0"): Llama a no_check($data) → no hace absolutamente nada. El input (title) llega limpio y sin filtrar a la consulta SQL → vulnerable a payloads como ' OR 1='1.
 + Medium (case "1"): Usa sqli_check_1($data) → aplica filtros básicos (elimina apóstrofos, palabras como OR, etc.). Algunos payloads simples fallan.
 + High (case "2"): Usa sqli_check_2($data) → filtros más estrictos. Mucho más difícil explotar.
 Impossible: Aunque el switch usa no_check por defecto, en nivel Impossible el propio reto cambia la lógica (usa consultas preparadas en lugar de concatenación), por lo que la inyección ya no funciona.
-
 
 ---
 Gracias a este diseño, bWAPP permite practicar la misma vulnerabilidad (SQL Injection) en diferentes escenarios: desde un entorno totalmente inseguro (Low), pasando por filtros intermedios (Medium y High), hasta un contexto en el que la vulnerabilidad debería estar corregida (Impossible). Esto ayuda a entender cómo influyen las medidas de validación y sanitización del input en la explotación real de la aplicación.

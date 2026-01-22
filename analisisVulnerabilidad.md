@@ -1,4 +1,19 @@
 # Análisis de Vulnerabilidad: SQL Injection (GET/Search) en bWAPP
+# Índice 📑
+
+- [1. Elección del reto](#1-elección-del-reto) 🔍  
+- [2. Demostración paso a paso](#2-demostración-paso-a-paso) 🧪  
+  - [2.1 Funcionamiento normal](#21-funcionamiento-normal-uso-legítimo) ✅  
+  - [2.2 Comprobación de vulnerabilidad](#22-comprobación-de-la-vulnerabilidad) ⚠️  
+  - [2.3 Explotación exitosa](#23-explotación-exitosa-de-la-inyección) 💥  
+  - [2.4 Observación de parámetros y método HTTP](#24-observación-de-parámetros-y-método-http) 🌐  
+- [3. Localizar PHP en el contenedor](#3-localizar-php-en-el-contenedor) 🐳  
+  - [3.1 Acceso al contenedor](#31-acceso-al-contenedor-bwapp)  
+  - [3.2 Localización del archivo vulnerable](#32-localización-del-archivo-vulnerable)  
+- [4. Análisis del código y niveles de seguridad](#4-análisis-del-código-vulnerable-y-gestión-de-niveles-de-seguridad) 🔬  
+  - [4.1 Control de niveles (security_level_check.php)](#41-cómo-bwapp-controla-los-niveles-de-seguridad-security_level_checkphp)  
+  - [4.2 Función sqli() y niveles](#42-cómo-se-aplica-el-nivel-de-seguridad-al-input-función-sqli-en-sqli_1php)  
+- [5. Conclusión y mitigaciones](#5-conclusión-y-recomendaciones) 📝
 
 ## 1. Elección del reto
 Voy a analizar una vulnerabilidad en la máquina bWAPP, en concreto *** SQL Injection (GET/Search)***

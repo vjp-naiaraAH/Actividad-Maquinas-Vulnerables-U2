@@ -31,5 +31,3 @@ Demostrar la vulnerabilidad SQL Injection (GET/Search), explotarla paso a paso, 
 El análisis detallado (con todos los pasos, comandos Docker, código fuente y explicación de niveles Low/Medium/High/Impossible) está en:
 
 → **[analisisVulnerabilidad.md](./analisisVulnerabilidad.md)**
-
-## Estructura del repositorio

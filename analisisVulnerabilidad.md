@@ -1,7 +1,8 @@
 1. Elección del reto
 Voy a analizar una vulnerabilidad en la máquina bWAPP, en concreto SQL Injection (GET/Search)
 Se muestra una pantalla como esta
-img1.png
+![Pantallazo principal de la página INCIBE](https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img1.png)
+
 Está ejecutando la fuente en sqli_1.php
 img2.png
 **DEMOSTRACIÓN**

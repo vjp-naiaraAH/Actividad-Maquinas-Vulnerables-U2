@@ -1,46 +1,46 @@
 1. Elección del reto
 Voy a analizar una vulnerabilidad en la máquina bWAPP, en concreto SQL Injection (GET/Search)
 Se muestra una pantalla como esta
-![Pantallazo principal de la página INCIBE](https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img1.png)
+![Pantallazo bwap](https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img1.png)
 
 Está ejecutando la fuente en sqli_1.php
-img2.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img2.png)
 **DEMOSTRACIÓN**
 ***
 2.Probar el funcionamiento normal
 Hago uso de payloads inofensivos para demostrar el problema.
 ***
 Lo primero es por ejemplo mostrar que efectivamente muestra peliculas como "iron man"
-img3.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img3.png)
 3. Comprobar si es vulnerable
 Buscando en internet encuentro que por ejemplo poniendo asd' aparece un error de MySQL, indica que la consulta se está rompiendo y que puede haber SQLi
-img4.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img4.png)
 4. Explotar la inyección
 Ahora al introducir el payload <asd' OR 1='1> aparecen todas las películas, no solo los que coinciden con asd, eso demuestra la SQL Injection
-img5.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img5.png)
 5. Observar parámetros y tipo de petición
 Me fijo en la URL; es tipo ***GET***, sale lo siguiente
-img6.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img6.png)
 6. Localizar PHP en el contenedor
 Con el comando <Docker ps> busco cual es el contenedor de bWAPP
-img7.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img7.png)
 Ejecuto los comandos 
 ***
 Docker exec -it bwapp /bin/bash
 cd /var/www/html
 ***
 para entrar en el contenedor y cambiarme al directorio /var/www/HTML
-img8.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img8.png)
 Luego localizo el fichero sqli_1.php, por ejemplo con el comando 
 ***
 ls sqli*
 ***
-img9.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img9.png)
 Para ver el código de este fichero ejecuto 
 ***
 cat sqli_1.php
 ***
-img10.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img10.png)
 ## 7. Análisis del código vulnerable y gestión de niveles de seguridad
 
 El reto SQL Injection (GET/Search) está implementado en el archivo **sqli_1.php**.
@@ -55,7 +55,7 @@ Antes de que cualquier reto se ejecute, bWAPP incluye el archivo `security_level
 Si alguna de las dos condiciones falla, redirige a `security_level_set.php` para forzar la configuración.
 
 **Captura del contenido de security_level_check.php**  
-img11.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img11.png)
 
 En esta captura se observa:
 - Include de `admin/settings.php` (donde probablemente están definidas constantes como AIM_IPS o AIM_subnet).
@@ -69,7 +69,7 @@ Esto explica por qué, al entrar en bWAPP desde localhost con la cookie seteada 
 Una vez que el nivel está validado, el archivo `sqli_1.php` define la función `sqli($data)` que decide qué hacer con el input del usuario (en este caso, el parámetro `title`).
 
 **Captura de la función sqli($data) en sqli_1.php**  
-img12.png
+(https://raw.githubusercontent.com/vjp-naiaraAH/Actividad-Maquinas-Vulnerables-U2/refs/heads/main/images/img12.png)
 
 Código relevante extraído:
 

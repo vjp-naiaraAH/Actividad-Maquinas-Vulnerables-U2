@@ -118,9 +118,9 @@ function sqli($data) {
 }
 Explicación por nivel (en el que trabajamos: Low)
 ```
-+ Low (case "0"): Llama a no_check($data) → no hace absolutamente nada. El input (title) llega limpio y sin filtrar a la consulta SQL → vulnerable a payloads como ' OR 1='1.
-+ Medium (case "1"): Usa sqli_check_1($data) → aplica filtros básicos (elimina apóstrofos, palabras como OR, etc.). Algunos payloads simples fallan.
-+ High (case "2"): Usa sqli_check_2($data) → filtros más estrictos. Mucho más difícil explotar.
++ **Low (case "0"): Llama a no_check($data)** → no hace absolutamente nada. El input (title) llega limpio y sin filtrar a la consulta SQL → vulnerable a payloads como ' OR 1='1.
++ **Medium (case "1"): Usa sqli_check_1($data)** → aplica filtros básicos (elimina apóstrofos, palabras como OR, etc.). Algunos payloads simples fallan.
++ **High (case "2"): Usa sqli_check_2($data)** → filtros más estrictos. Mucho más difícil explotar.
 Impossible: Aunque el switch usa no_check por defecto, en nivel Impossible el propio reto cambia la lógica (usa consultas preparadas en lugar de concatenación), por lo que la inyección ya no funciona.
 
 ---
